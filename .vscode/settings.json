@@ -1,6 +1,16 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "ros.distro": "melodic",
+    "debug.javascript.defaultRuntimeExecutable": {
+        "pwa-node": "/usr/local/n/versions/node/20.11.1/bin/node"
+    },
+    
 }

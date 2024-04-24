@@ -1,93 +1,56 @@
-/**
- * ⚠ These are used just to render the Sidebar!
- * You can include any link here, local or external.
- *
- */
+import {IRoute,Role} from 'utils/types'
 
-interface IRoute{
-  path?: string
-  icon?: string
-  name: string
-  routes?: IRoute[]
-  checkActive?(pathname: String, route: IRoute): boolean
-  exact?: boolean
-}
-
-export function routeIsActive (pathname: String, route: IRoute): boolean {
-  if (route.checkActive) {
-    return route.checkActive(pathname, route)
+// TODO 依据权限的不同 动态的更改路由内容
+export function checkActive(role: Role, route: IRoute): boolean {
+  if (route.deactiveRole.includes(role)) {
+    return false
   }
-
-  return route?.exact
-    ? pathname == route?.path
-    : (route?.path ? pathname.indexOf(route.path) === 0 : false)
+  return true
 }
 
 const routes: IRoute[] = [
   {
-    path: '/example', // the url
+    path: '/app', // the url
     icon: 'HomeIcon', // the component being exported from icons/index.js
     name: 'Dashboard', // name that appear in Sidebar
-    exact: true,
+    deactiveRole: [],
+    default: true
   },
   {
-    path: '/example/forms',
-    icon: 'FormsIcon',
-    name: 'Forms',
-  },
-  {
-    path: '/example/cards',
-    icon: 'CardsIcon',
-    name: 'Cards',
-  },
-  {
-    path: '/example/charts',
+    path: '/app/charts',
     icon: 'ChartsIcon',
     name: 'Charts',
-  },
-  {
-    path: '/example/buttons',
-    icon: 'ButtonsIcon',
-    name: 'Buttons',
-  },
-  {
-    path: '/example/modals',
-    icon: 'ModalsIcon',
-    name: 'Modals',
-  },
-  {
-    path: '/example/tables',
-    icon: 'TablesIcon',
-    name: 'Tables',
+    deactiveRole: []
   },
   {
     icon: 'PagesIcon',
     name: 'Pages',
+    path: '',
     routes: [
       // submenu
       {
-        path: '/example/login',
+        path: '/app/login',
         name: 'Login',
+        deactiveRole: []
       },
       {
-        path: '/example/create-account',
-        name: 'Create account',
-      },
-      {
-        path: '/example/forgot-password',
-        name: 'Forgot password',
-      },
-      {
-        path: '/example/404',
+        path: '/app/404',
         name: '404',
+        deactiveRole: []
       },
       {
-        path: '/example/blank',
+        path: '/app/blank',
         name: 'Blank',
+        deactiveRole: []
       },
     ],
-  },
+    deactiveRole: []
+  }, {
+    icon: 'FormsIcon',
+    name: '客户管理',
+    path: '/app/customers',
+    deactiveRole: []
+  }
 ]
 
-export type {IRoute}
 export default routes

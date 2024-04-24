@@ -6,6 +6,7 @@ interface IScrollY {
   id: string | null
   position: number
 }
+
 interface ISidebarContext {
   isSidebarOpen: boolean
   scrollY: IScrollY
